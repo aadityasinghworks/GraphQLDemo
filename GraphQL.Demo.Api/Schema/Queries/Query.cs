@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using System.Reflection.Metadata.Ecma335;
 
-namespace GraphQL.Demo.Api.Schema
+namespace GraphQL.Demo.Api.Schema.Queries
 {
     public class Query
     {

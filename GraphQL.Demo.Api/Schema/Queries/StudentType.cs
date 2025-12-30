@@ -1,4 +1,4 @@
-﻿namespace GraphQL.Demo.Api.Schema
+﻿namespace GraphQL.Demo.Api.Schema.Queries
 {
     public class StudentType
     {
