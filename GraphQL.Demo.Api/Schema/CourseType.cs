@@ -10,6 +10,8 @@
         [GraphQLNonNullType]
         public InstructorType Instructor { get; set; }
 
+        public string Duration { get; set; }
+
 
         public string Description()
         {
