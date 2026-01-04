@@ -40,7 +40,7 @@ namespace GraphQL.Demo.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Couses",
+                name: "Courses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -50,9 +50,9 @@ namespace GraphQL.Demo.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Couses", x => x.Id);
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Couses_Instructors_InstructorId",
+                        name: "FK_Courses_Instructors_InstructorId",
                         column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "Id",
@@ -60,7 +60,7 @@ namespace GraphQL.Demo.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CouseDTOStudentDTO",
+                name: "CourseDTOStudentDTO",
                 columns: table => new
                 {
                     CoursesId = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -68,15 +68,15 @@ namespace GraphQL.Demo.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CouseDTOStudentDTO", x => new { x.CoursesId, x.StudentsId });
+                    table.PrimaryKey("PK_CourseDTOStudentDTO", x => new { x.CoursesId, x.StudentsId });
                     table.ForeignKey(
-                        name: "FK_CouseDTOStudentDTO_Couses_CoursesId",
+                        name: "FK_CourseDTOStudentDTO_Courses_CoursesId",
                         column: x => x.CoursesId,
-                        principalTable: "Couses",
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CouseDTOStudentDTO_Students_StudentsId",
+                        name: "FK_CourseDTOStudentDTO_Students_StudentsId",
                         column: x => x.StudentsId,
                         principalTable: "Students",
                         principalColumn: "Id",
@@ -84,13 +84,13 @@ namespace GraphQL.Demo.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CouseDTOStudentDTO_StudentsId",
-                table: "CouseDTOStudentDTO",
+                name: "IX_CourseDTOStudentDTO_StudentsId",
+                table: "CourseDTOStudentDTO",
                 column: "StudentsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Couses_InstructorId",
-                table: "Couses",
+                name: "IX_Courses_InstructorId",
+                table: "Courses",
                 column: "InstructorId");
         }
 
@@ -98,10 +98,10 @@ namespace GraphQL.Demo.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CouseDTOStudentDTO");
+                name: "CourseDTOStudentDTO");
 
             migrationBuilder.DropTable(
-                name: "Couses");
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Students");

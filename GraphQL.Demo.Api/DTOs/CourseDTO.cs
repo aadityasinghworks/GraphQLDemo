@@ -3,7 +3,7 @@ using GraphQL.Demo.Api.Schema.Queries;
 
 namespace GraphQL.Demo.Api.DTOs
 {
-    public class CouseDTO
+    public class CourseDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = "";

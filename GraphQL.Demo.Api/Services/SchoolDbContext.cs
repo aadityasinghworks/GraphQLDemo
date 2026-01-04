@@ -7,7 +7,7 @@ namespace GraphQL.Demo.Api.Services
     {
         public SchoolDbContext(DbContextOptions<SchoolDbContext> options) : base(options) { }
 
-        public DbSet<CouseDTO> Couses { get; set; }
+        public DbSet<CourseDTO> Courses { get; set; }
         public DbSet<InstructorDTO> Instructors { get; set; }
         public DbSet<StudentDTO> Students { get; set; }
 

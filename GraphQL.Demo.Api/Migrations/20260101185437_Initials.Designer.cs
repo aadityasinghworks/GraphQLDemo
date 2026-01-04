@@ -20,7 +20,7 @@ namespace GraphQL.Demo.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
 
-            modelBuilder.Entity("CouseDTOStudentDTO", b =>
+            modelBuilder.Entity("CourseDTOStudentDTO", b =>
                 {
                     b.Property<Guid>("CoursesId")
                         .HasColumnType("TEXT");
@@ -32,10 +32,10 @@ namespace GraphQL.Demo.Api.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("CouseDTOStudentDTO");
+                    b.ToTable("CourseDTOStudentDTO");
                 });
 
-            modelBuilder.Entity("GraphQL.Demo.Api.DTOs.CouseDTO", b =>
+            modelBuilder.Entity("GraphQL.Demo.Api.DTOs.CourseDTO", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace GraphQL.Demo.Api.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Couses");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("GraphQL.Demo.Api.DTOs.InstructorDTO", b =>
@@ -102,9 +102,9 @@ namespace GraphQL.Demo.Api.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("CouseDTOStudentDTO", b =>
+            modelBuilder.Entity("CourseDTOStudentDTO", b =>
                 {
-                    b.HasOne("GraphQL.Demo.Api.DTOs.CouseDTO", null)
+                    b.HasOne("GraphQL.Demo.Api.DTOs.CourseDTO", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -117,7 +117,7 @@ namespace GraphQL.Demo.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GraphQL.Demo.Api.DTOs.CouseDTO", b =>
+            modelBuilder.Entity("GraphQL.Demo.Api.DTOs.CourseDTO", b =>
                 {
                     b.HasOne("GraphQL.Demo.Api.DTOs.InstructorDTO", "Instructor")
                         .WithMany("Courses")
