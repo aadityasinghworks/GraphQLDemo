@@ -19,8 +19,6 @@ namespace GraphQL.Demo.Api.Schema.Queries
         {
             try
             {
-
-
                 IEnumerable<CourseDTO> courseDTOs = await _coursesRepository.GetAll();
 
                 return courseDTOs.Select(c => new CourseType()
@@ -28,13 +26,14 @@ namespace GraphQL.Demo.Api.Schema.Queries
                     Id = c.Id,
                     Name = c.Name,
                     Subjects = c.Subjects,
-                    Instructor = new InstructorType()
-                    {
-                        Id = c.Instructor.Id,
-                        FirstName = c.Instructor.FirstName,
-                        LastName = c.Instructor.LastName,
-                        Salary = c.Instructor.Salary
-                    }
+                    InstructorId = c.InstructorId,
+                    //Instructor = new InstructorType()
+                    //{
+                    //    Id = c.Instructor.Id,
+                    //    FirstName = c.Instructor.FirstName,
+                    //    LastName = c.Instructor.LastName,
+                    //    Salary = c.Instructor.Salary
+                    //}
                 });
             }
             catch (Exception)
@@ -52,13 +51,14 @@ namespace GraphQL.Demo.Api.Schema.Queries
                 Id = courseDTO.Id,
                 Name = courseDTO.Name,
                 Subjects = courseDTO.Subjects,
-                Instructor = new InstructorType()
-                {
-                    Id = courseDTO.Instructor.Id,
-                    FirstName = courseDTO.Instructor.FirstName,
-                    LastName = courseDTO.Instructor.LastName,
-                    Salary = courseDTO.Instructor.Salary
-                }
+                InstructorId = courseDTO.InstructorId,
+                //Instructor = new InstructorType()
+                //{
+                //    Id = courseDTO.Instructor.Id,
+                //    FirstName = courseDTO.Instructor.FirstName,
+                //    LastName = courseDTO.Instructor.LastName,
+                //    Salary = courseDTO.Instructor.Salary
+                //}
             };
         }
 
