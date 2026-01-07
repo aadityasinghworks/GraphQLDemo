@@ -3,6 +3,8 @@ using GraphQL.Demo.Api.DTOs;
 using GraphQL.Demo.Api.Models;
 using GraphQL.Demo.Api.Services.Courses;
 using System.Reflection.Metadata.Ecma335;
+using HotChocolate.Data;
+using GraphQL.Demo.Api.Services;
 
 namespace GraphQL.Demo.Api.Schema.Queries
 {
@@ -14,13 +16,11 @@ namespace GraphQL.Demo.Api.Schema.Queries
         {
             _coursesRepository = coursesRepository;
         }
-
+        [UsePaging(IncludeTotalCount = true, DefaultPageSize = 5)]
         public async Task<IEnumerable<CourseType>> GetCourses()
         {
             try
             {
-
-
                 IEnumerable<CourseDTO> courseDTOs = await _coursesRepository.GetAll();
 
                 return courseDTOs.Select(c => new CourseType()
@@ -28,13 +28,7 @@ namespace GraphQL.Demo.Api.Schema.Queries
                     Id = c.Id,
                     Name = c.Name,
                     Subjects = c.Subjects,
-                    Instructor = new InstructorType()
-                    {
-                        Id = c.Instructor.Id,
-                        FirstName = c.Instructor.FirstName,
-                        LastName = c.Instructor.LastName,
-                        Salary = c.Instructor.Salary
-                    }
+                    InstructorId = c.InstructorId,
                 });
             }
             catch (Exception)
@@ -44,6 +38,40 @@ namespace GraphQL.Demo.Api.Schema.Queries
             }
         }
 
+
+        [UsePaging(IncludeTotalCount = true, DefaultPageSize = 5)]
+        public async Task<IQueryable<CourseType>> GetPaginatedCourses(SchoolDbContext schoolDbContext)
+        {
+
+            return schoolDbContext.Courses.Select(c => new CourseType()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Subjects = c.Subjects,
+                InstructorId = c.InstructorId,
+            });
+        }
+
+
+
+
+        //  [UseOffsetPaging(IncludeTotalCount = true, DefaultPageSize = 5)]
+        public async Task<IQueryable<CourseType>> GetOffSetCourses()
+        {
+            var courseDTOs = await _coursesRepository.GetAll();
+
+            return courseDTOs
+                .Select(c => new CourseType
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Subjects = c.Subjects,
+                    InstructorId = c.InstructorId
+                })
+                .AsQueryable();
+        }
+
+
         public async Task<CourseType> GetCourseByIdAsync(Guid id)
         {
             CourseDTO courseDTO = await _coursesRepository.GetCourseById(id);
@@ -52,13 +80,14 @@ namespace GraphQL.Demo.Api.Schema.Queries
                 Id = courseDTO.Id,
                 Name = courseDTO.Name,
                 Subjects = courseDTO.Subjects,
-                Instructor = new InstructorType()
-                {
-                    Id = courseDTO.Instructor.Id,
-                    FirstName = courseDTO.Instructor.FirstName,
-                    LastName = courseDTO.Instructor.LastName,
-                    Salary = courseDTO.Instructor.Salary
-                }
+                InstructorId = courseDTO.InstructorId,
+                //Instructor = new InstructorType()
+                //{
+                //    Id = courseDTO.Instructor.Id,
+                //    FirstName = courseDTO.Instructor.FirstName,
+                //    LastName = courseDTO.Instructor.LastName,
+                //    Salary = courseDTO.Instructor.Salary
+                //}
             };
         }
 
