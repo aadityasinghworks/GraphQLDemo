@@ -21,7 +21,7 @@ builder.Services.AddGraphQLServer()
 
 #region[Connection String]
 var connectionString = builder.Configuration.GetConnectionString("default");
-builder.Services.AddPooledDbContextFactory<SchoolDbContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddPooledDbContextFactory<SchoolDbContext>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine));
 #endregion
 
 #region[Register services]
