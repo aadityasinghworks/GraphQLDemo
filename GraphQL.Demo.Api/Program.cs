@@ -16,7 +16,7 @@ builder.Services.AddGraphQLServer()
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
                 .AddInMemorySubscriptions()
-                .AddFiltering();
+                .AddFiltering().AddSorting();
 
 #endregion
 
